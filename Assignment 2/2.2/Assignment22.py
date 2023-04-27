@@ -112,7 +112,7 @@ def main(file: str, sc, k=3):
     centroidsx, centroidsy = final_centroids.T
     plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C)
 
-    point_label = knn(alldata, labels, test_point, k, i=1)
+    point_label = knn(alldata, labels, test_point, k=3, i=2)
 
 
 if __name__ == "__main__":
