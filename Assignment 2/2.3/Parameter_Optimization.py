@@ -15,7 +15,6 @@ import time
 filename = "data_ga.txt"
 populationSize = 100
 numberOfGenerations = 1000
-creepRate = 0.01
 # Do not change these
 numberOfParameters = 6
 maximumParameterValue = 2
@@ -182,6 +181,7 @@ def main(mp, cp, tp, cr, crp):
 
     return fitness
 
+
 def evaluate_params(param):
     mp, cp, tp, cr, crp = param
     result = main(mp, cp, tp, cr, crp)
@@ -189,11 +189,11 @@ def evaluate_params(param):
 
 
 if __name__ == "__main__":
-    mp_test = [0.05, 0.1]
-    cp_test = [0.5, 0.6]
-    tp_test = [0.7, 0.75]
-    cr_test = [0.01, 0.02]
-    crp_test = [0.1, 0.3]
+    mp_test = [0.05, 0.1, 0.15, 0.2]
+    cp_test = [0.4, 0.5, 0.6, 0.7, 0.8]
+    tp_test = [0.7, 0.75, 0.80, 0.85]
+    cr_test = [0.01, 0.02, 0.03, 0.04, 0.05]
+    crp_test = [0.1, 0.3, 0.5, 0.7]
 
     # Create a pool of processes
     pool = multiprocessing.Pool()
@@ -214,3 +214,8 @@ if __name__ == "__main__":
 
     print('Best parameters: ', best_param)
     print('Best result: ', best_result)
+
+    with open("Optimal_Parameters.txt", "a") as file:
+        file.write(f"Fitness: {best_result}, Pop_size: {populationSize}, Generations: {numberOfGenerations}\n"
+                   f"MP: {best_param[0]}, CP: {best_param[1]} TP: {best_param[2]},"
+                   f"CR: {best_param[3]}, CRP: {best_param[4]}\n\n")

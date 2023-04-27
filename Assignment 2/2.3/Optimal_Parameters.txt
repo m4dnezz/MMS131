@@ -1,0 +1,3 @@
+Fitness: 0.7603162251992325, Pop_size: 100, Generations: 1000
+MP: 0.1, CP: 0.5 TP: 0.75,CR: 0.02, CRP: 0.3
+
