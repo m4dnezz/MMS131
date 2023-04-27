@@ -13,8 +13,8 @@ import time
 
 # Change these parameters as desired
 filename = "data_ga.txt"
-populationSize = 100
-numberOfGenerations = 1000
+populationSize = 200
+numberOfGenerations = 5000
 # Do not change these
 numberOfParameters = 6
 maximumParameterValue = 2
@@ -211,9 +211,6 @@ if __name__ == "__main__":
         if result > best_result:
             best_param = param
             best_result = result
-
-    print('Best parameters: ', best_param)
-    print('Best result: ', best_result)
 
     with open("Optimal_Parameters.txt", "a") as file:
         file.write(f"Fitness: {best_result}, Pop_size: {populationSize}, Generations: {numberOfGenerations}\n"
