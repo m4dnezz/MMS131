@@ -9,13 +9,13 @@ from tqdm.auto import tqdm
 
 # Change these parameters as desired
 filename = "data_ga.txt"
-populationSize = 300
-numberOfGenerations = 5000
-tournamentProbability = 0.8
-crossoverProbability = 0.5
-mutationProbability = 0.2
-creepProbability = 0.8
-creepRate = 0.03
+populationSize = 100
+numberOfGenerations = 10000
+tournamentProbability = 0.75
+crossoverProbability = 0.75
+mutationProbability = 0.125
+creepProbability = 0.5
+creepRate = 0.01
 
 # Do not change these
 numberOfParameters = 6
@@ -23,19 +23,13 @@ maximumParameterValue = 2
 
 #############################
 
+
 def importdata(file):
     alldata = np.genfromtxt(file)
     xdata = alldata[:, 0]
     ydata = alldata[:, 1]
     gdata = alldata[:, 2]
     return xdata, ydata, gdata, alldata
-
-
-def init_ind(parameters=6, mini=-maximumParameterValue, maxi=maximumParameterValue):
-    ind = []
-    for i in range(parameters):
-        ind.append(random.uniform(mini, maxi))
-    return ind
 
 
 def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
@@ -47,13 +41,13 @@ def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
     return pop
 
 
-def EvaluateIndividual(ind, functionData):
+def EvaluateIndividual(ind, functionData, xdata, ydata, gdata):
     alldata = functionData
-    x = alldata[0]
-    y = alldata[1]
-    gdata = alldata[2]
+    x = xdata
+    y = ydata
+    g = gdata
     approx = (1 + ind[0] * x + ind[1] * x ** 2 + ind[2] * x ** 3) / (1 + ind[3] * y + ind[4] * y ** 2 + ind[5] * y ** 3)
-    error = np.sqrt(np.sum((approx - gdata) ** 2) * (1 / populationSize))
+    error = np.sqrt(np.sum((approx - g) ** 2) * (1 / populationSize))
     fitness = np.exp(-error)
     return fitness
 
@@ -136,7 +130,7 @@ def main():
 
         # Evaluate generation
         for i in range(len(population)):
-            f_ind = EvaluateIndividual(population[i], alldata)
+            f_ind = EvaluateIndividual(population[i], alldata, xdata, ydata, gdata)
             fitness_population.append(f_ind)
             if f_ind > fitness:
                 fitness = f_ind
@@ -191,8 +185,8 @@ def main():
     plt.figure()
     plt.title("GA Performance over generation")
     plt.plot(x, maximum_fitness, 'r--', label="Maximum fitness")
-    plt.xlim([100, numberOfGenerations])
-    plt.ylim([0.4, 1])
+
+
     plt.legend()
     plt.show()
 
