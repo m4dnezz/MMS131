@@ -4,6 +4,7 @@ from tqdm.auto import tqdm
 import itertools
 import multiprocessing
 import psutil
+import os
 import time
 
 
@@ -187,6 +188,11 @@ def evaluate_params(param):
     result = main(mp, cp, tp, cr, crp)
     return param, result
 
+def limit_cpu():
+    "is called at every process start"
+    p = psutil.Process(os.getpid())
+    # set to lowest priority, this is windows only, on Unix use ps.nice(19)
+    p.nice(psutil.IDLE_PRIORITY_CLASS)
 
 if __name__ == "__main__":
     mp_test = [0.05, 0.1, 0.15, 0.2]
@@ -197,7 +203,7 @@ if __name__ == "__main__":
 
     for knulla in range(4):
         # Create a pool of processes
-        pool = multiprocessing.Pool()
+        pool = multiprocessing.Pool(None, limit_cpu)
 
         # Evaluate the parameters in parallel
         results = list(
