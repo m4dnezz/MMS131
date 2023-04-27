@@ -9,20 +9,19 @@ from tqdm.auto import tqdm
 
 # Change these parameters as desired
 filename = "data_ga.txt"
-populationSize = 100  # Needs to be even
-numberOfGenerations = 10000
-tournamentProbability = 0.75
-crossoverProbability = 0.75
-mutationProbability = 0.125
-creepProbability = 0.5
-creepRate = 0.01
+populationSize = 300
+numberOfGenerations = 5000
+tournamentProbability = 0.8
+crossoverProbability = 0.5
+mutationProbability = 0.2
+creepProbability = 0.8
+creepRate = 0.03
 
 # Do not change these
 numberOfParameters = 6
 maximumParameterValue = 2
 
 #############################
-
 
 def importdata(file):
     alldata = np.genfromtxt(file)
@@ -44,14 +43,10 @@ def g_fun(ind, x, y):
     return approx
 
 
-def calc_error(approx, gdata):
+def calc_fit(approx, gdata):
     error = np.sqrt((1 / populationSize) * np.sum((approx - gdata)**2))
-    return error
-
-
-def calc_fitness(error):
-    return np.exp(-error)
-#######################
+    fitness = np.exp(-error)
+    return fitness
 
 
 def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
@@ -65,8 +60,7 @@ def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
 def EvaluateIndividual(chromosome, functionData):
     alldata = functionData
     approx = g_fun(chromosome, alldata[0], alldata[1])
-    error = calc_error(approx, alldata[2])
-    fitness = calc_fitness(error)
+    fitness = calc_fit(approx, alldata[2])
     return fitness
 
 
@@ -130,7 +124,7 @@ def main():
 
     # Initialize everything
     xdata, ydata, gdata, alldata = importdata(filename)
-    population = InitializePopulation()
+    population = InitializePopulation(populationSize)
     igeneration = 0
     maximum_fitness = []
     best_chromosome = None
