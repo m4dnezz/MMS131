@@ -38,29 +38,23 @@ def init_ind(parameters=6, mini=-maximumParameterValue, maxi=maximumParameterVal
     return ind
 
 
-def g_fun(ind, x, y):
-    approx = (1 + ind[0] * x + ind[1] * x ** 2 + ind[2] * x ** 3) / (1 + ind[3] * y + ind[4] * y ** 2 + ind[5] * y ** 3)
-    return approx
-
-
-def calc_fit(approx, gdata):
-    error = np.sqrt((1 / populationSize) * np.sum((approx - gdata)**2))
-    fitness = np.exp(-error)
-    return fitness
-
-
 def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
     if not empty:
-        pop = np.random.uniform(-maximumParameterValue, maximumParameterValue + 0.00001, size=(populationSize, numberOfParameters))
+        pop = np.random.uniform(-maximumParameterValue, maximumParameterValue + 0.00001,
+                                size=(populationSize, numberOfParameters))
     else:
         pop = np.zeros(shape=(populationSize, numberOfParameters))
     return pop
 
 
-def EvaluateIndividual(chromosome, functionData):
+def EvaluateIndividual(ind, functionData):
     alldata = functionData
-    approx = g_fun(chromosome, alldata[0], alldata[1])
-    fitness = calc_fit(approx, alldata[2])
+    x = alldata[0]
+    y = alldata[1]
+    gdata = alldata[2]
+    approx = (1 + ind[0] * x + ind[1] * x ** 2 + ind[2] * x ** 3) / (1 + ind[3] * y + ind[4] * y ** 2 + ind[5] * y ** 3)
+    error = np.sqrt(np.sum((approx - gdata) ** 2) * (1 / populationSize))
+    fitness = np.exp(-error)
     return fitness
 
 
@@ -196,12 +190,11 @@ def main():
 
     plt.figure()
     plt.title("GA Performance over generation")
-    plt.plot(x, maximum_fitness,'r--', label="Maximum fitness")
+    plt.plot(x, maximum_fitness, 'r--', label="Maximum fitness")
     plt.xlim([100, numberOfGenerations])
     plt.ylim([0.4, 1])
     plt.legend()
     plt.show()
-
 
 
 if __name__ == "__main__":
