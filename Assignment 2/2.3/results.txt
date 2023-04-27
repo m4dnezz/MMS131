@@ -1,38 +1,5 @@
-Fitness: 0.8729856084252741, Pop_size: 200, Generations: 1000 
-TP: 0.65, COP: 0.2 MP: 0.3, CP: 0.8, CR: 0.03
 
-Fitness: 0.8687564431017455, Pop_size: 200, Generations: 1000 
- TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
- 
-Fitness: 0.5463880422583507, Pop_size: 200, Generations: 1000
-TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
- 
-Fitness: 0.87525503797096, Pop_size: 500, Generations: 1000
-TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
- 
-Fitness: 0.9660815292227845, Pop_size: 500, Generations: 2000
-TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
- 
-Fitness: 0.8687546550415296, Pop_size: 500, Generations: 5000
-TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
- 
-Fitness: 0.9738330945417076, Pop_size: 500, Generations: 3000
-TP: 0.8, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
- 
-Fitness: 0.9653928375448552, Pop_size: 500, Generations: 3000
-TP: 0.8, COP: 0.2 MP: 0.4,CP: 0.8, CR: 0.03
- 
-Fitness: 0.9466349200897726, Pop_size: 500, Generations: 4000
-TP: 0.8, COP: 0.2 MP: 0.4,CP: 0.8, CR: 0.03
- 
-Fitness: 0.9214490264304057, Pop_size: 500, Generations: 4000
-TP: 0.8, COP: 0.2 MP: 0.4,CP: 0.8, CR: 0.05
- 
-Fitness: 0.9286949909540758, Pop_size: 500, Generations: 4000
-TP: 0.8, COP: 0.2 MP: 0.4,CP: 0.8, CR: 0.05
-Chromosome: [-0.75959217  1.65849909 -1.28526599 -0.38907467 -0.08064507  0.006065  ] 
- 
-Fitness: 0.9578302368632995, Pop_size: 500, Generations: 5000
-TP: 0.8, COP: 0.2 MP: 0.4,CP: 0.8, CR: 0.05
-Chromosome: [ 0.1116211  -0.03712982  1.50670212  1.80822213  0.21181519 -0.0320778 ] 
+Fitness: 0.4443509246890662, Pop_size: 100, Generations: 10000
+TP: 0.75, COP: 0.75 MP: 0.125,CP: 0.5, CR: 0.01
+Chromosome: [ 1.70067687  1.70083248  1.84691328 -0.90491994  0.14767694  0.13427954] 
  

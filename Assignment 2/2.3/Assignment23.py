@@ -9,13 +9,13 @@ from tqdm.auto import tqdm
 
 # Change these parameters as desired
 filename = "data_ga.txt"
-populationSize = 500  # Needs to be even
-numberOfGenerations = 5000
-tournamentProbability = 0.8
-crossoverProbability = 0.2
-mutationProbability = 0.4
-creepProbability = 0.8
-creepRate = 0.05
+populationSize = 100  # Needs to be even
+numberOfGenerations = 10000
+tournamentProbability = 0.75
+crossoverProbability = 0.75
+mutationProbability = 0.125
+creepProbability = 0.5
+creepRate = 0.01
 
 # Do not change these
 numberOfParameters = 6
@@ -45,7 +45,7 @@ def g_fun(ind, x, y):
 
 
 def calc_error(approx, gdata):
-    error = np.sqrt(1 / populationSize * np.sum((approx - gdata)**2))
+    error = np.sqrt((1 / populationSize) * np.sum((approx - gdata)**2))
     return error
 
 
@@ -75,9 +75,11 @@ def TournamentSelect(fitness, tournamentProbability, size=2):
     random_1 = random.randint(0, len(fitness) - 1)
     random_2 = random.randint(0, len(fitness) - 1)
     # Make sure that we do not have the same value
+
     while random_1 == random_2:
         random_1 = random.randint(0, len(fitness) - 1)
         random_2 = random.randint(0, len(fitness) - 1)
+
     # Get the individual from the population
     ind_1 = fitness[random_1]
     ind_2 = fitness[random_2]
@@ -100,8 +102,8 @@ def Cross(chromosome_1, chromosome_2, p_cross):
         return chromosome_1, chromosome_2
     else:
         cut = random.randint(0, 6)
-        new_ind_1 = np.concatenate([chromosome_1[cut:, ], chromosome_2[0:cut]])
-        new_ind_2 = np.concatenate([chromosome_2[cut:, ], chromosome_1[0:cut]])
+        new_ind_1 = np.concatenate([chromosome_1[0:cut], chromosome_2[cut:, ]])
+        new_ind_2 = np.concatenate([chromosome_2[0:cut], chromosome_1[cut:, ]])
         return new_ind_1, new_ind_2
 
 
@@ -109,7 +111,7 @@ def Mutate(originalchromosome, mutationprobability, creepprobability, creeprate)
     newchromosome = []
     for gene in originalchromosome:
         # Do not perform any mutation
-        if random.random()  > mutationprobability:
+        if random.random() > mutationprobability:
             newchromosome.append(gene)
         # Perform Mutation
         else:

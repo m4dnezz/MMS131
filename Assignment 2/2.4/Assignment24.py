@@ -1,6 +1,5 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from queue import Queue
 
 
 ############################################
@@ -71,7 +70,7 @@ def bfs(maze, start: tuple, goal: tuple, connectivity: int):
                 came_from[neighbor] = current
 
     # If we've exhausted the frontier and haven't found the goal, return None
-    return None
+    raise ValueError("No solution found!")
 
 
 def starting_point(maze: np.array):
@@ -98,7 +97,6 @@ def plot(maze: np.array, path: list):
     # Go over every ppoint in the maze
     for i in range(len(maze)):
         for j in range(len(maze[0])):
-
             # Can't go
             if maze[i][j] == 1:
                 if not wall_label:

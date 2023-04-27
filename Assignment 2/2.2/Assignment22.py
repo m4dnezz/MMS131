@@ -52,8 +52,11 @@ def kmeans(data, k, centroids, max_iters=10000):
         C2.append(centroids[1])
         C3.append(centroids[2])
         centroids = new_centroids
-        C = [C1, C2, C3]
 
+    C1.append(centroids[0])
+    C2.append(centroids[1])
+    C3.append(centroids[2])
+    C = [C1, C2, C3]
     return centroids, labels, C
 
 
@@ -88,15 +91,16 @@ def plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C):
     fig, ax = plt.subplots()
     ax.scatter(test_point[0], test_point[1], label="test-point", color="black")
     ax.scatter(xdata, ydata, label="Data")
-    ax.scatter(centroidsx[0], centroidsy[0], label="C1 - Final", color="green")
-    ax.scatter(centroidsx[1], centroidsy[1], label="C2 - Final", color="red")
-    ax.scatter(centroidsx[2], centroidsy[2], label="C3 - Final", color="yellow")
     ax.scatter(sc[0][0], sc[0][1], label="C1 - Start", color="green")
     ax.scatter(sc[1][0], sc[1][1], label="C2 - Start", color="red")
     ax.scatter(sc[2][0], sc[2][1], label="C3 - Start", color="yellow")
+    ax.scatter(centroidsx[0], centroidsy[0], label="C1 - Final", color="green")
+    ax.scatter(centroidsx[1], centroidsy[1], label="C2 - Final", color="red")
+    ax.scatter(centroidsx[2], centroidsy[2], label="C3 - Final", color="yellow")
     fig.legend(loc="upper right")
     line_segments = LineCollection(C, color="black", linestyles="dotted")
     ax.add_collection(line_segments)
+    plt.title("Plot of data and clustering")
     plt.show()
 
 
