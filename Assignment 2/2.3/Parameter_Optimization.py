@@ -193,26 +193,27 @@ if __name__ == "__main__":
     cp_test = [0.4, 0.5, 0.6, 0.7, 0.8]
     tp_test = [0.7, 0.75, 0.80, 0.85]
     cr_test = [0.01, 0.02, 0.03, 0.04, 0.05]
-    crp_test = [0.1, 0.3, 0.5, 0.7]
+    crp_test = [0.2, 0.3, 0.5, 0.6, 0.7]
 
-    # Create a pool of processes
-    pool = multiprocessing.Pool()
+    for knulla in range(4):
+        # Create a pool of processes
+        pool = multiprocessing.Pool()
 
-    # Evaluate the parameters in parallel
-    results = list(
-        tqdm(pool.imap_unordered(evaluate_params, itertools.product(mp_test, cp_test, tp_test, cr_test, crp_test)),
-             total=len(mp_test) * len(cp_test) * len(tp_test) * len(cr_test) * len(crp_test), position=0, leave=True,
-             colour="green"))
+        # Evaluate the parameters in parallel
+        results = list(
+            tqdm(pool.imap_unordered(evaluate_params, itertools.product(mp_test, cp_test, tp_test, cr_test, crp_test)),
+                 total=len(mp_test) * len(cp_test) * len(tp_test) * len(cr_test) * len(crp_test), position=0, leave=True,
+                 colour="green"))
 
-    # Find the best parameters and result
-    best_param = None
-    best_result = float('-inf')
-    for param, result in results:
-        if result > best_result:
-            best_param = param
-            best_result = result
+        # Find the best parameters and result
+        best_param = None
+        best_result = float('-inf')
+        for param, result in results:
+            if result > best_result:
+                best_param = param
+                best_result = result
 
-    with open("Optimal_Parameters.txt", "a") as file:
-        file.write(f"Fitness: {best_result}, Pop_size: {populationSize}, Generations: {numberOfGenerations}\n"
-                   f"MP: {best_param[0]}, CP: {best_param[1]} TP: {best_param[2]},"
-                   f"CR: {best_param[3]}, CRP: {best_param[4]}\n\n")
+        with open("Optimal_Parameters.txt", "a") as file:
+            file.write(f"Fitness: {best_result}, Pop_size: {populationSize}, Generations: {numberOfGenerations}\n"
+                       f"MP: {best_param[0]}, CP: {best_param[1]} TP: {best_param[2]},"
+                       f"CR: {best_param[3]}, CRP: {best_param[4]}\n\n")
