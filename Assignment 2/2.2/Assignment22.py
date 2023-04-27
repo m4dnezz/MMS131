@@ -105,7 +105,7 @@ def plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C):
 
 
 def main(file: str, sc, k=3):
-    test_point = (-2, 8)
+    test_point = (0, 0)
     xdata, ydata, alldata = importdata(file)
     final_centroids, labels, C = kmeans(alldata, k, centroids=sc)
     write_to_file(labels)
