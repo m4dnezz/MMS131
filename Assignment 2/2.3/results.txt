@@ -1,0 +1,9 @@
+Fitness: 0.8729856084252741, Pop_size: 200, Generations: 1000 
+TP: 0.65, COP: 0.2 MP: 0.3, CP: 0.8, CR: 0.03
+
+Fitness: 0.8687564431017455, Pop_size: 200, Generations: 1000 
+ TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
+ 
+Fitness: 0.5463880422583507, Pop_size: 200, Generations: 1000
+TP: 0.65, COP: 0.2 MP: 0.3,CP: 0.8, CR: 0.03
+ 

@@ -10,10 +10,10 @@ from tqdm.auto import tqdm
 # Change these parameters as desired
 filename = "data_ga.txt"
 populationSize = 200  # Needs to be even
-numberOfGenerations = 50000
+numberOfGenerations = 1000
 tournamentProbability = 0.65
-crossoverProbability = 0.5
-mutationProbability = 0.1
+crossoverProbability = 0.2
+mutationProbability = 0.3
 creepProbability = 0.8
 creepRate = 0.03
 
@@ -191,6 +191,11 @@ def main():
         igeneration += 1
 
     print(f"Fitness is: {fitness} with parameters{best_chromosome}")
+
+    with open("results.txt", "a") as file:
+        file.write(f"Fitness: {fitness}, Pop_size: {populationSize}, Generations: {numberOfGenerations}\n"
+                   f"TP: {tournamentProbability}, COP: {crossoverProbability} MP: {mutationProbability},"
+                   f"CP: {creepProbability}, CR: {creepRate}\n \n")
 
     plt.figure()
     plt.title("GA Performance over generation")
