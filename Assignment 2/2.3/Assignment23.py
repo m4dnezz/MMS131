@@ -9,8 +9,8 @@ from tqdm.auto import tqdm
 
 # Change these parameters as desired
 filename = "data_ga.txt"
-populationSize = 200  # Needs to be even
-numberOfGenerations = 1000
+populationSize = 500  # Needs to be even
+numberOfGenerations = 2000
 tournamentProbability = 0.65
 crossoverProbability = 0.2
 mutationProbability = 0.3
