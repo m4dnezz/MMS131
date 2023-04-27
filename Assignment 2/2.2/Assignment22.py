@@ -64,7 +64,7 @@ def knn(data, labels, point: tuple, k: int, i: int):
     k_closest_points = []
     point_labels = []
     # Calculate distance between new point and existing points
-    distances = np.array([minowski_distance(point, c, i=1) for c in data])
+    distances = np.array([minowski_distance(point, c, i=i) for c in data])
 
     # Get the index of the k the closest points
     for m in range(k):
