@@ -79,30 +79,30 @@ def TournamentSelect(fitness, tournamentProbability):
     return ind
 
 
-def Cross(chromosome_1, chromosome_2, p_cross):
-    if random.random() > p_cross:
-        return chromosome_1, chromosome_2
+def Cross(chromosome1, chromosome2):
+    if random.random() > crossoverProbability:
+        return chromosome1, chromosome2
     else:
         cut = random.randint(0, 6)
-        new_ind_1 = np.concatenate([chromosome_1[0:cut], chromosome_2[cut:, ]])
-        new_ind_2 = np.concatenate([chromosome_2[0:cut], chromosome_1[cut:, ]])
+        new_ind_1 = np.concatenate([chromosome1[0:cut], chromosome2[cut:, ]])
+        new_ind_2 = np.concatenate([chromosome2[0:cut], chromosome1[cut:, ]])
         return new_ind_1, new_ind_2
 
 
-def Mutate(originalchromosome, mutationprobability, creepprobability, creeprate):
+def Mutate(originalChromosome, mutationProbability, creepProbability, creepRate):
     newchromosome = []
-    for gene in originalchromosome:
+    for gene in originalChromosome:
         # Do not perform any mutation
-        if random.random() > mutationprobability:
+        if random.random() > mutationProbability:
             newchromosome.append(gene)
         # Perform Mutation
         else:
             # Perform Full-range mutation
-            if random.random() > creepprobability:
+            if random.random() > creepProbability:
                 newchromosome.append(np.random.uniform(-2, 2))
             # Perform Creep mutation
             else:
-                mutation = random.uniform(-creeprate / 2, creeprate / 2)
+                mutation = random.uniform(-creepRate / 2, creepRate / 2)
                 newchromosome.append(gene + mutation)
     return newchromosome
 
@@ -159,7 +159,7 @@ def main():
             chromosome_2 = population[ind_2]
 
             # Perform crossover
-            new_individual_pair = Cross(chromosome_1, chromosome_2, crossoverProbability)
+            new_individual_pair = Cross(chromosome_1, chromosome_2)
             temp_pop[m] = new_individual_pair[0]
             temp_pop[m + 1] = new_individual_pair[1]
 
