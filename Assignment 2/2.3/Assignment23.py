@@ -1,7 +1,6 @@
 import numpy as np
 import random
 from matplotlib import pyplot as plt
-from tqdm.auto import tqdm
 
 ############################################
 # Made by Niclas Persson 2023/04/26
@@ -10,7 +9,7 @@ from tqdm.auto import tqdm
 # Change these parameters as desired
 filename = "data_ga.txt"
 populationSize = 200
-numberOfGenerations = 10000
+numberOfGenerations = 5000
 tournamentProbability = 0.7
 crossoverProbability = 0.5
 mutationProbability = 0.1
@@ -108,8 +107,6 @@ def Mutate(originalChromosome, mutationProbability, creepProbability, creepRate)
 
 
 def main():
-    # Add nice progress-bar #REMOVE BEFORE HADNING IN
-
     # Initialize everything
     xdata, ydata, gdata, alldata = importdata(filename)
     population = InitializePopulation(populationSize, numberOfParameters)
@@ -117,7 +114,7 @@ def main():
     maximum_fitness = []
     best_chromosome = None
     x = []
-    pbar = tqdm(total=numberOfGenerations, position=0, leave=True, colour="green")
+    fitness = None
 
     # Run the evolution
     while igeneration < numberOfGenerations:
@@ -126,7 +123,6 @@ def main():
         best_index = None
         fitness = 0
 
-        pbar.update(1)
 
         # Evaluate generation
         for i in range(len(population)):
