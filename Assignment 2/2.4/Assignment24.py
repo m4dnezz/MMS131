@@ -33,8 +33,9 @@ def get_neighbors(maze, point, connectivity: int):
             neighbors.append((new_row, new_col))
     return neighbors
 
+
 def dist(node, goal):
-    return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1]))**2) # Euclidean
+    return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1])) ** 2)  # Euclidean
     # return abs(node[0] - goal[0]) + abs(node[1] - goal[1]) # Manhattan
 
 
