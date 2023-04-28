@@ -186,5 +186,6 @@ def main():
     plt.show()
 
 
+# To run, press green arrow
 if __name__ == "__main__":
     main()
