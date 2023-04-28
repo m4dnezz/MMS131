@@ -29,7 +29,7 @@ def get_neighbors(maze, point, connectivity: int):
 
     for drow, dcol in dirs:
         new_row, new_col = row + drow, col + dcol
-        if 0 <= new_row < len(maze) and 0 <= new_col < len(maze[0]) and maze[new_row][new_col] in [0, 3]:
+        if 0 <= new_row < len(maze) and 0 <= new_col < len(maze[0]) and int(maze[new_row][new_col]) in [0, 3]:
             neighbors.append((new_row, new_col))
     return neighbors
 
@@ -59,6 +59,7 @@ def bfs(maze, start: tuple, goal: tuple, connectivity: int):
                 current = came_from[current]
             path.append(start)
             path.reverse()
+            print(came_from)
             return path
 
         # Loop through the neighboring nodes of the current node
@@ -146,4 +147,4 @@ def main(connectivity: int, filename: str):
 # Press Green arrow to run
 # Files and connectivity is changed below and below only
 if __name__ == "__main__":
-    main(connectivity=4, filename="maze_big.txt")
+    main(connectivity=8, filename="maze_big.txt")
