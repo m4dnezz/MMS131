@@ -35,7 +35,7 @@ def kmeans(data, k, centroids, max_iters=10000):
     for step in range(max_iters):
 
         # Assign samples to nearest centroid
-        distances = np.array([[minowski_distance(data, c) for c in centroids] for data in data])
+        distances = np.array([[minowski_distance(data, c, i=1) for c in centroids] for data in data])
 
         # np.argmin function returns the index of the nearest centroid to each sample, resulting in the labels array
         labels = np.argmin(distances, axis=1)
@@ -110,9 +110,17 @@ def main(file: str, sc, k=3):
     final_centroids, labels, C = kmeans(alldata, k, centroids=sc)
     write_to_file(labels)
     centroidsx, centroidsy = final_centroids.T
+
+    point_label_k3_i1 = knn(alldata, labels, test_point, k=3, i=1)
+    point_label_k7_i1 = knn(alldata, labels, test_point, k=7, i=1)
+    point_label_k11_i1 = knn(alldata, labels, test_point, k=11, i=1)
+
+    point_label_k3_i2 = knn(alldata, labels, test_point, k=3, i=2)
+    point_label_k7_i2 = knn(alldata, labels, test_point, k=7, i=2)
+    point_label_k11_i2 = knn(alldata, labels, test_point, k=11, i=2)
+
     plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C)
 
-    point_label = knn(alldata, labels, test_point, k=3, i=2)
 
 
 if __name__ == "__main__":
