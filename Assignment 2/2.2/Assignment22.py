@@ -17,10 +17,10 @@ def importdata(name: str):
 
 def minowski_distance(x1, x2, i=1):
     if i == 1:
-        return sum(abs(val1 - val2) for val1, val2 in zip(x1, x2))
+        return sum(abs(val1 - val2) for val1, val2 in zip(x1, x2)) # Manhattan
 
     elif i == 2:
-        return np.sqrt(np.sum(np.abs((x1 - x2)) ** 2))
+        return np.sqrt(np.abs((x1[0] - x2[0])) ** 2 + np.abs((x1[1] - x2[1]))**2) # Euclidean
 
     elif i == 3:
         return np.cbrt(np.sum(np.abs((x1 - x2)) ** 3))
