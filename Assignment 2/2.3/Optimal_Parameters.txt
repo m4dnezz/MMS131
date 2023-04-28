@@ -7,3 +7,8 @@ MP: 0.1, CP: 0.6 TP: 0.85,CR: 0.01, CRP: 0.7
 Fitness: 0.9953985359824372, Pop_size: 200, Generations: 5000
 MP: 0.1, CP: 0.5 TP: 0.8,CR: 0.02, CRP: 0.7
 
+Fitness: 0.9973914234219242, Pop_size: 200, Generations: 5000
+MP: 0.1, CP: 0.5 TP: 0.8,CR: 0.02, CRP: 0.7
+
+Fitness: 0.9939082345598723, Pop_size: 200, Generations: 5000
+MP: 0.1, CP: 0.5 TP: 0.8,CR: 0.02, CRP: 0.7
