@@ -191,7 +191,7 @@ def evaluate_params(param):
 def limit_cpu():
     "is called at every process start"
     p = psutil.Process(os.getpid())
-    # set to lowest priority, this is windows only, on Unix use ps.nice(19)
+    # set to lowest priority, WORKS ON WINDOWS ONLY
     p.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)
 
 if __name__ == "__main__":
@@ -201,9 +201,9 @@ if __name__ == "__main__":
     cr_test = [0.01, 0.02, 0.03, 0.04, 0.05]
     crp_test = [0.2, 0.3, 0.5, 0.6, 0.7]
 
-    for knulla in range(4):
+    for MMS131 in range(4):
         # Create a pool of processes
-        pool = multiprocessing.Pool(None, limit_cpu)
+        pool = multiprocessing.Pool(None, limit_cpu) # Remove both parameters if normal CPU usage is desired
 
         # Evaluate the parameters in parallel
         results = list(
