@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 # Change these parameters as desired
 filename = "data_ga.txt"
 populationSize = 200
-numberOfGenerations = 100
+numberOfGenerations = 10000
 tournamentProbability = 0.8
 crossoverProbability = 0.5
 mutationProbability = 0.1
