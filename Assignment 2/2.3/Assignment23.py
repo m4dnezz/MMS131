@@ -9,8 +9,8 @@ from matplotlib import pyplot as plt
 # Change these parameters as desired
 filename = "data_ga.txt"
 populationSize = 200
-numberOfGenerations = 5000
-tournamentProbability = 0.7
+numberOfGenerations = 10000
+tournamentProbability = 0.8
 crossoverProbability = 0.5
 mutationProbability = 0.1
 creepProbability = 0.7
@@ -20,10 +20,11 @@ creepRate = 0.02
 numberOfParameters = 6
 maximumParameterValue = 2
 
+
 #############################
 
 
-def importdata(file):
+def importdata(file: str):
     alldata = np.genfromtxt(file)
     xdata = alldata[:, 0]
     ydata = alldata[:, 1]
@@ -123,7 +124,6 @@ def main():
         best_index = None
         fitness = 0
 
-
         # Evaluate generation
         for i in range(len(population)):
             f_ind = EvaluateIndividual(population[i], alldata)
@@ -181,8 +181,6 @@ def main():
     plt.figure()
     plt.title("GA Performance over generation")
     plt.plot(x, maximum_fitness, 'r--', label="Maximum fitness")
-
-
     plt.legend()
     plt.show()
 
