@@ -36,7 +36,8 @@ def get_neighbors(maze, point, connectivity: int):
 
 def bfs(maze, start: tuple, goal: tuple, connectivity: int):
     def dist(node):
-        return abs(node[0] - goal[0]) + abs(node[1] - goal[1])
+        return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1]))**2) # Euclidean
+        # return abs(node[0] - goal[0]) + abs(node[1] - goal[1]) # Manhattan
 
     # Initialize the frontier as a list containing the starting node and cost
     frontier = [(start, 0)]
