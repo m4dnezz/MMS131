@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 # Change these parameters as desired
 filename = "data_ga.txt"
 populationSize = 200
-numberOfGenerations = 10000
+numberOfGenerations = 100
 tournamentProbability = 0.8
 crossoverProbability = 0.5
 mutationProbability = 0.1
@@ -116,6 +116,7 @@ def main():
     best_chromosome = None
     x = []
     fitness = None
+    # population[0,:] = [-2,0,1,0,0.5,-0.5 ] used to test the "true" parameters
 
     # Run the evolution
     while igeneration < numberOfGenerations:
