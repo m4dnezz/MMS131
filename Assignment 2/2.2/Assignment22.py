@@ -2,12 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
+
 ############################################
 # Made by Niclas Persson 2023/04/26
 ###########################################
 
 
-def importdata(name:str):
+def importdata(name: str):
     alldata = np.genfromtxt(name)
     xdata = alldata[:, 0]
     ydata = alldata[:, 1]
@@ -16,7 +17,7 @@ def importdata(name:str):
 
 def minowski_distance(x1, x2, i=1):
     if i == 1:
-        return sum(abs(val1-val2) for val1, val2 in zip(x1, x2))
+        return sum(abs(val1 - val2) for val1, val2 in zip(x1, x2))
 
     elif i == 2:
         return np.sqrt(np.sum(np.abs((x1 - x2)) ** 2))
@@ -33,7 +34,6 @@ def kmeans(data, k, centroids, max_iters=10000):
     C1 = []
     C2 = []
     C3 = []
-    C = None
     # Iterate until convergence or max_iters is reached
     for step in range(max_iters):
 
@@ -77,7 +77,7 @@ def knn(data, labels, point: tuple, k: int, i: int):
         distances[cp] = np.inf
 
     for points in k_closest_points:
-        point_labels.append(labels[points]+1)
+        point_labels.append(labels[points] + 1)
 
     point_label = max(set(point_labels), key=point_labels.count)
 
@@ -88,7 +88,8 @@ def write_to_file(labels):
     file = "kmeans_labels.txt"
     with open(file, 'w') as file:
         for label in labels:
-            file.write(f"{label+1}\n")
+            file.write(f"{label + 1}\n")
+
 
 def plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C):
     fig, ax = plt.subplots()
@@ -114,16 +115,19 @@ def main(file: str, sc, k=3):
     write_to_file(labels)
     centroidsx, centroidsy = final_centroids.T
 
-    point_label_k3_i1 = knn(alldata, labels, test_point, k=3, i=1)
-    point_label_k7_i1 = knn(alldata, labels, test_point, k=7, i=1)
-    point_label_k11_i1 = knn(alldata, labels, test_point, k=11, i=1)
+    print(knn(alldata, labels, test_point, k=3, i=1))
+    print(knn(alldata, labels, test_point, k=7, i=1))
+    print(knn(alldata, labels, test_point, k=11, i=1))
 
-    point_label_k3_i2 = knn(alldata, labels, test_point, k=3, i=2)
-    point_label_k7_i2 = knn(alldata, labels, test_point, k=7, i=2)
-    point_label_k11_i2 = knn(alldata, labels, test_point, k=11, i=2)
+    print(knn(alldata, labels, test_point, k=3, i=2))
+    print(knn(alldata, labels, test_point, k=7, i=2))
+    print(knn(alldata, labels, test_point, k=11, i=2))
+
+    print(knn(alldata, labels, test_point, k=3, i=3))
+    print(knn(alldata, labels, test_point, k=7, i=3))
+    print(knn(alldata, labels, test_point, k=11, i=3))
 
     plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C)
-
 
 
 if __name__ == "__main__":
