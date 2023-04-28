@@ -35,8 +35,8 @@ def get_neighbors(maze, point, connectivity: int):
 
 
 def dist(node, goal):
-    return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1])) ** 2)  # Euclidean
-    # return abs(node[0] - goal[0]) + abs(node[1] - goal[1]) # Manhattan
+    # return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1])) ** 2)  # Euclidean
+    return abs(node[0] - goal[0]) + abs(node[1] - goal[1]) # Manhattan
 
 
 def bfs(maze, start: tuple, goal: tuple, connectivity: int):
@@ -44,9 +44,9 @@ def bfs(maze, start: tuple, goal: tuple, connectivity: int):
     current = start
     neighbors = []
     distance = []
-    test = True
-    # If we've reached the goal node, reconstruct the path and return it
-    while test:
+    searching = True
+
+    while searching:
         if current == goal:
             return came_from
 
@@ -54,6 +54,9 @@ def bfs(maze, start: tuple, goal: tuple, connectivity: int):
         for neighbor in get_neighbors(maze, current, connectivity):
             if neighbor not in came_from:
                 neighbors.append(neighbor)
+
+        if not neighbors:
+            raise Exception("No solution found!")
 
         for neighbor in neighbors:
             distance.append(dist(neighbor, goal))
@@ -63,9 +66,6 @@ def bfs(maze, start: tuple, goal: tuple, connectivity: int):
         came_from.append(current)
         neighbors = []
         distance = []
-
-    # If we've exhausted the frontier and haven't found the goal, return None
-    raise Exception("No solution found!")
 
 
 def starting_point(maze: np.array):
@@ -140,4 +140,4 @@ def main(connectivity: int, filename: str):
 # Press Green arrow to run
 # Files and connectivity is changed below and below only
 if __name__ == "__main__":
-    main(connectivity=4, filename="maze_big.txt")
+    main(connectivity=8, filename="maze_big.txt")
