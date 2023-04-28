@@ -9,13 +9,13 @@ from tqdm.auto import tqdm
 
 # Change these parameters as desired
 filename = "data_ga.txt"
-populationSize = 100
+populationSize = 200
 numberOfGenerations = 10000
-tournamentProbability = 0.75
-crossoverProbability = 0.75
-mutationProbability = 0.125
-creepProbability = 0.5
-creepRate = 0.01
+tournamentProbability = 0.7
+crossoverProbability = 0.5
+mutationProbability = 0.1
+creepProbability = 0.7
+creepRate = 0.02
 
 # Do not change these
 numberOfParameters = 6
@@ -32,7 +32,7 @@ def importdata(file):
     return xdata, ydata, gdata, alldata
 
 
-def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
+def InitializePopulation(populationSize, numberOfParameters, empty=False):
     if not empty:
         pop = np.random.uniform(-maximumParameterValue, maximumParameterValue + 0.00001,
                                 size=(populationSize, numberOfParameters))
@@ -41,11 +41,11 @@ def InitializePopulation(populationSize=100, numberOfParameters=6, empty=False):
     return pop
 
 
-def EvaluateIndividual(ind, functionData, xdata, ydata, gdata):
+def EvaluateIndividual(ind, functionData):
     alldata = functionData
-    x = xdata
-    y = ydata
-    g = gdata
+    x = alldata[:, 0]
+    y = alldata[:, 1]
+    g = alldata[:, 2]
     approx = (1 + ind[0] * x + ind[1] * x ** 2 + ind[2] * x ** 3) / (1 + ind[3] * y + ind[4] * y ** 2 + ind[5] * y ** 3)
     error = np.sqrt(np.sum((approx - g) ** 2) * (1 / populationSize))
     fitness = np.exp(-error)
@@ -112,7 +112,7 @@ def main():
 
     # Initialize everything
     xdata, ydata, gdata, alldata = importdata(filename)
-    population = InitializePopulation(populationSize)
+    population = InitializePopulation(populationSize, numberOfParameters)
     igeneration = 0
     maximum_fitness = []
     best_chromosome = None
@@ -130,7 +130,7 @@ def main():
 
         # Evaluate generation
         for i in range(len(population)):
-            f_ind = EvaluateIndividual(population[i], alldata, xdata, ydata, gdata)
+            f_ind = EvaluateIndividual(population[i], alldata)
             fitness_population.append(f_ind)
             if f_ind > fitness:
                 fitness = f_ind
@@ -142,7 +142,7 @@ def main():
         best_chromosome = population[best_index]
 
         # Generate temporary population
-        temp_pop = InitializePopulation(populationSize, empty=True)
+        temp_pop = InitializePopulation(populationSize, numberOfParameters, empty=True)
 
         # Transfer from old population to temporary
         for m in range(0, populationSize, 2):
