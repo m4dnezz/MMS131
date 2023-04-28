@@ -33,43 +33,35 @@ def get_neighbors(maze, point, connectivity: int):
             neighbors.append((new_row, new_col))
     return neighbors
 
+def dist(node, goal):
+    return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1]))**2) # Euclidean
+    # return abs(node[0] - goal[0]) + abs(node[1] - goal[1]) # Manhattan
+
 
 def bfs(maze, start: tuple, goal: tuple, connectivity: int):
-    def dist(node):
-        return np.sqrt(np.abs((node[0] - goal[0])) ** 2 + np.abs((node[1] - goal[1]))**2) # Euclidean
-        # return abs(node[0] - goal[0]) + abs(node[1] - goal[1]) # Manhattan
-
-    # Initialize the frontier as a list containing the starting node and cost
-    frontier = [(start, 0)]
-
-    # Initialize the came_from dictionary with the starting node
-    came_from = {start: None}
-
-    while frontier:
-        # Get the node with the lowest heuristic cost from the frontier
-        current, cost = min(frontier, key=lambda x: x[1])
-        # Remove the current node from the frontier
-        frontier.remove((current, cost))
-
-        # If we've reached the goal node, reconstruct the path and return it
+    came_from = [start]
+    current = start
+    neighbors = []
+    distance = []
+    test = True
+    # If we've reached the goal node, reconstruct the path and return it
+    while test:
         if current == goal:
-            path = []
-            while current != start:
-                path.append(current)
-                current = came_from[current]
-            path.append(start)
-            path.reverse()
-            print(came_from)
-            return path
+            return came_from
 
         # Loop through the neighboring nodes of the current node
         for neighbor in get_neighbors(maze, current, connectivity):
-            # Calculate the heuristic cost of the node
-            heuristic_cost = dist(neighbor)
-            # If the neighbor hasn't been visited before, add it to the frontier and came_from
             if neighbor not in came_from:
-                frontier.append((neighbor, heuristic_cost))
-                came_from[neighbor] = current
+                neighbors.append(neighbor)
+
+        for neighbor in neighbors:
+            distance.append(dist(neighbor, goal))
+
+        best_neighbor = neighbors[np.argmin(distance)]
+        current = best_neighbor
+        came_from.append(current)
+        neighbors = []
+        distance = []
 
     # If we've exhausted the frontier and haven't found the goal, return None
     raise Exception("No solution found!")
@@ -147,4 +139,4 @@ def main(connectivity: int, filename: str):
 # Press Green arrow to run
 # Files and connectivity is changed below and below only
 if __name__ == "__main__":
-    main(connectivity=8, filename="maze_big.txt")
+    main(connectivity=4, filename="maze_big.txt")
