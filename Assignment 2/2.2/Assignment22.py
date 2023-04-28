@@ -114,20 +114,21 @@ def main(file: str, sc, k=3):
     final_centroids, labels, C = kmeans(alldata, k, centroids=sc)
     write_to_file(labels)
     centroidsx, centroidsy = final_centroids.T
-
-    print(knn(alldata, labels, test_point, k=3, i=1))
-    print(knn(alldata, labels, test_point, k=7, i=1))
-    print(knn(alldata, labels, test_point, k=11, i=1))
-
-    print(knn(alldata, labels, test_point, k=3, i=2))
-    print(knn(alldata, labels, test_point, k=7, i=2))
-    print(knn(alldata, labels, test_point, k=11, i=2))
-
-    print(knn(alldata, labels, test_point, k=3, i=3))
-    print(knn(alldata, labels, test_point, k=7, i=3))
-    print(knn(alldata, labels, test_point, k=11, i=3))
-
     plotting(xdata, ydata, sc, test_point, centroidsx, centroidsy, C)
+
+    # print(knn(alldata, labels, test_point, k=3, i=1))
+    # print(knn(alldata, labels, test_point, k=7, i=1))
+    # print(knn(alldata, labels, test_point, k=11, i=1))
+    #
+    # print(knn(alldata, labels, test_point, k=3, i=2))
+    # print(knn(alldata, labels, test_point, k=7, i=2))
+    # print(knn(alldata, labels, test_point, k=11, i=2))
+    #
+    # print(knn(alldata, labels, test_point, k=3, i=3))
+    # print(knn(alldata, labels, test_point, k=7, i=3))
+    # print(knn(alldata, labels, test_point, k=11, i=3))
+
+
 
 
 if __name__ == "__main__":
