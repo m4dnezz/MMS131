@@ -52,7 +52,7 @@ def EvaluateIndividual(ind, functionData):
     return fitness
 
 
-def TournamentSelect(fitness, tournamentProbability, size=2):
+def TournamentSelect(fitness, tournamentProbability):
     tp = tournamentProbability
     random_1 = random.randint(0, len(fitness) - 1)
     random_2 = random.randint(0, len(fitness) - 1)
