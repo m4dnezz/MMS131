@@ -70,7 +70,7 @@ def bfs(maze, start: tuple, goal: tuple, connectivity: int):
                 came_from[neighbor] = current
 
     # If we've exhausted the frontier and haven't found the goal, return None
-    raise ValueError("No solution found!")
+    raise Exception("No solution found!")
 
 
 def starting_point(maze: np.array):
