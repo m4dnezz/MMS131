@@ -21,6 +21,9 @@ def minowski_distance(x1, x2, i=1):
     elif i == 2:
         return np.sqrt(np.sum(np.abs((x1 - x2)) ** 2))
 
+    elif i == 3:
+        return np.cbrt(np.sum(np.abs((x1 - x2)) ** 3))
+
     else:
         raise ValueError("i must be 1 or 2")
 
